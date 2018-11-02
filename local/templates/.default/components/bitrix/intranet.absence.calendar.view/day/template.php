@@ -6,7 +6,7 @@ if (window.JCCalendarViewDay)
 	jsBXAC.SetViewHandler(new JCCalendarViewDay());
 else
 	BX.loadScript(
-		'/bitrix/components/bitrix/intranet.absence.calendar.view/templates/day/view.js', 
+		'/local/templates/.default/components/bitrix/intranet.absence.calendar.view/day/view.js',
 		function() {jsBXAC.SetViewHandler(new JCCalendarViewDay())}
 	);
 </script>

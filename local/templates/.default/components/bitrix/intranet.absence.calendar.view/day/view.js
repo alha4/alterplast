@@ -13,6 +13,7 @@ function JCCalendarViewDay(date)
 	}
 
 	BX.bind(window, 'resize', BX.proxy(this.__onresize, this));
+
 }
 
 JCCalendarViewDay.prototype.__onresize = function ()
@@ -327,8 +328,12 @@ JCCalendarViewDay.prototype.__drawData = function()
 
 				this.ENTRIES[i]['DATA'][j].VISUAL.bx_color_variant = this.ENTRIES[i]['DATA'][j]['TYPE'].length ? this.ENTRIES[i]['DATA'][j]['TYPE'] : 'OTHER';
 
-				this.ENTRIES[i]['DATA'][j].VISUAL.className = 'bx-calendar-entry bx-calendar-color-' + this.ENTRIES[i]['DATA'][j].VISUAL.bx_color_variant;
-				this.ENTRIES[i]['DATA'][j].VISUAL.style.background = this.TYPE_BGCOLORS[(this.ENTRIES[i]['DATA'][j]['TYPE'].length ? this.ENTRIES[i]['DATA'][j]['TYPE'] : 'OTHER')];
+				//this.ENTRIES[i]['DATA'][j].VISUAL.className = 'bx-calendar-entry bx-calendar-color-' + this.ENTRIES[i]['DATA'][j].VISUAL.bx_color_variant;
+				this.ENTRIES[i]['DATA'][j].VISUAL.className = 'bx-calendar-entry bx-calendar-color-';
+				this.ENTRIES[i]['DATA'][j].VISUAL.style.background = this.TYPE_BGCOLORS[this.ENTRIES[i]['DATA'][j]['PROPERTY_ABSENCE_TYPE_VALUE']].BG;
+				this.ENTRIES[i]['DATA'][j].VISUAL.style.color = this.TYPE_BGCOLORS[this.ENTRIES[i]['DATA'][j]['PROPERTY_ABSENCE_TYPE_VALUE']].COLOR;
+				if(this.ENTRIES[i]['DATA'][j]['PROPERTY_CONFIRMED_VALUE']=='' && this.TYPE_BGCOLORS[this.ENTRIES[i]['DATA'][j]['PROPERTY_ABSENCE_TYPE_VALUE']].CONFIRM)
+					this.ENTRIES[i]['DATA'][j].VISUAL.style.opacity = 0.5;
 
 				this.ENTRIES[i]['DATA'][j].VISUAL.style.top = (obRowPos.top + padding) + 'px';
 

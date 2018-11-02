@@ -6,7 +6,7 @@ if (window.JCCalendarViewWeek)
 	jsBXAC.SetViewHandler(new JCCalendarViewWeek());
 else
 	BX.loadScript(
-		'/bitrix/components/bitrix/intranet.absence.calendar.view/templates/week/view.js', 
+		'/local/templates/.default/components/bitrix/intranet.absence.calendar.view/week/view.js', 
 		function() {jsBXAC.SetViewHandler(new JCCalendarViewWeek())}
 	);
 </script>

@@ -206,23 +206,10 @@ JCCalendarViewWeek.prototype.__drawLayout = function()
 
 		cur_date.setDate(cur_date.getDate() + 1);
 	}
-
-	this._parent.CONTROLS.CALENDAR.appendChild(document.createElement('BR'));
-	this._parent.CONTROLS.CALENDAR.appendChild(document.createElement('BR'));
-
-	this.obPageBar = document.createElement('DIV');
-	this.obPageBar.style.padding = '10px 10px 3px';
-	this.obPageBar.style.fontSize = '0.95em';
-	this._parent.CONTROLS.CALENDAR.appendChild(this.obPageBar);
-
-	this._parent.CONTROLS.CALENDAR.appendChild(document.createElement('BR'));
-	this._parent.CONTROLS.CALENDAR.appendChild(document.createElement('BR'));
 }
 
 JCCalendarViewWeek.prototype.__drawData = function()
 {
-	var _this = this;
-
 	var today = new Date();
 	today.setHours(0);
 	today.setMinutes(0);
@@ -245,8 +232,7 @@ JCCalendarViewWeek.prototype.__drawData = function()
 
 			if (date_start.valueOf() > ts_finish.valueOf() || date_finish.valueOf() < ts_start.valueOf())
 			{
-				this.ENTRIES[i]['DATA'].splice(j, 1);
-				j--;
+				this.ENTRIES[i]['DATA'].splice(j,1)
 			}
 		}
 
@@ -321,9 +307,11 @@ JCCalendarViewWeek.prototype.__drawData = function()
 
 				this.ENTRIES[i]['DATA'][j].VISUAL.bx_color_variant = this.ENTRIES[i]['DATA'][j]['TYPE'].length ? this.ENTRIES[i]['DATA'][j]['TYPE'] : 'OTHER';
 
-				this.ENTRIES[i]['DATA'][j].VISUAL.className = 'bx-calendar-entry bx-calendar-color-' + this.ENTRIES[i]['DATA'][j].VISUAL.bx_color_variant;
-				this.ENTRIES[i]['DATA'][j].VISUAL.style.background = this.TYPE_BGCOLORS[(this.ENTRIES[i]['DATA'][j]['TYPE'].length ? this.ENTRIES[i]['DATA'][j]['TYPE'] : 'OTHER')];
-
+				this.ENTRIES[i]['DATA'][j].VISUAL.className = 'bx-calendar-entry bx-calendar-color-';
+				/*this.ENTRIES[i]['DATA'][j].VISUAL.style.background = this.TYPE_BGCOLORS[this.ENTRIES[i]['DATA'][j]['PROPERTY_ABSENCE_TYPE_VALUE']].BG;
+				this.ENTRIES[i]['DATA'][j].VISUAL.style.color = this.TYPE_BGCOLORS[this.ENTRIES[i]['DATA'][j]['PROPERTY_ABSENCE_TYPE_VALUE']].COLOR;
+				if(this.ENTRIES[i]['DATA'][j]['PROPERTY_CONFIRMED_VALUE']=='' && this.TYPE_BGCOLORS[this.ENTRIES[i]['DATA'][j]['PROPERTY_ABSENCE_TYPE_VALUE']].CONFIRM)
+					this.ENTRIES[i]['DATA'][j].VISUAL.style.opacity = 0.5;*/
 				this.ENTRIES[i]['DATA'][j].VISUAL.style.top = (obRowPos.top) + 'px';
 
 				if (date_start.valueOf() > ts_start.valueOf())
@@ -383,9 +371,11 @@ JCCalendarViewWeek.prototype.__drawData = function()
 				this.ENTRIES[i]['DATA'][j].VISUAL.style.width = width + 'px';
 				this.ENTRIES[i]['DATA'][j].VISUAL.style.height = parseInt(obPos.height - 2*padding) + 'px';
 
+				var nameAbsence = this.ENTRIES[i]['DATA'][j]['TYPE_NAME'] ? BX.util.htmlspecialchars(this.ENTRIES[i]['DATA'][j]['TYPE_NAME']) : BX.util.htmlspecialchars(this.ENTRIES[i]['DATA'][j]['NAME']);
+				
 				this.ENTRIES[i]['DATA'][j].VISUAL.innerHTML =
 					'<nobr>'
-					+ BX.util.htmlspecialchars(this.ENTRIES[i]['DATA'][j]['NAME'])
+					+ nameAbsence
 					+ ' (' + this.ENTRIES[i]['DATA'][j]['DATE_FROM'] + ' - ' + this.ENTRIES[i]['DATA'][j]['DATE_TO'] + ')'
 					+ '</nobr>';
 
@@ -397,59 +387,6 @@ JCCalendarViewWeek.prototype.__drawData = function()
 				this._parent.MAIN_LAYOUT.appendChild(this.ENTRIES[i]['DATA'][j].VISUAL);
 				this._parent.RegisterEntry(this.ENTRIES[i].DATA[j]);
 			}
-		}
-	}
-
-	if (this.SETTINGS.PAGE_COUNT > 1 || this.SETTINGS.PAGE_NUMBER > 0)
-	{
-		this.obPageBar.innerHTML = this._parent.MESSAGES.INTR_ABSC_TPL_PAGE_BAR + ': ';
-
-		for (var i = 0; i <= this.SETTINGS.PAGE_NUMBER; i++)
-		{
-			if (i == this.SETTINGS.PAGE_NUMBER)
-			{
-				var page_link = document.createTextNode(i+1);
-			}
-			else
-			{
-				var page_link = document.createElement('A');
-				page_link.href = 'javascript:void(0);';
-				page_link.innerHTML = i+1;
-				page_link.onclick = (function(i)
-				{
-					return function()
-					{
-						_this.SETTINGS.PAGE_NUMBER = i;
-						_this.Load();
-					};
-				})(i);
-			}
-
-			this.obPageBar.appendChild(page_link);
-			this.obPageBar.appendChild(document.createTextNode(' '));
-
-			if (i == 0 && this.SETTINGS.PAGE_NUMBER >= 6)
-			{
-				var page_link = document.createTextNode('...');
-				this.obPageBar.appendChild(page_link);
-				this.obPageBar.appendChild(document.createTextNode(' '));
-
-				i = this.SETTINGS.PAGE_NUMBER-4;
-			}
-		}
-
-		if (this.SETTINGS.PAGE_COUNT-1 > this.SETTINGS.PAGE_NUMBER)
-		{
-			var page_link = document.createElement('A');
-			page_link.href = 'javascript:void(0);';
-			page_link.innerHTML = this._parent.MESSAGES.INTR_ABSC_TPL_PAGE_NEXT;
-			page_link.onclick = function()
-			{
-				_this.SETTINGS.PAGE_NUMBER += 1;
-				_this.Load();
-			};
-
-			this.obPageBar.appendChild(page_link);
 		}
 	}
 }
