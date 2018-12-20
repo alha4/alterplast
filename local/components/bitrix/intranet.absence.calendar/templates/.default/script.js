@@ -1169,7 +1169,7 @@ BX.AbsenceCalendar.ShowTypesForm = function(arParams) {
 		draggable: {restrict:true},
 		closeByEsc: true,
 		titleBar: BX.message('INTR_ABSENCE_TITLE_TYPE'),
-		closeIcon: { width: "30px", height: "30px", right : "28px", top : "0px"},
+	/*	closeIcon: { width: "30px", height: "30px", right : "28px", top : "0px"},*/
 		buttons: [
 			new BX.PopupWindowButton({
 				className : "popup-window-button",
@@ -1211,7 +1211,7 @@ BX.AbsenceCalendar.ShowTypesForm = function(arParams) {
 
 				new BX.PopupWindowButton({
 					className : "popup-window-button",
-					text: 'закрыть',
+					text: 'Отмена',
 					events : { click : function() {  
 
 						popup.close();
@@ -1232,7 +1232,7 @@ BX.AbsenceCalendar.ShowTypesForm = function(arParams) {
       content+= '<td><div style="width:48px;height:48px;background-color:' + item.COLOR + '"></div>';
 		}
 		
-		content+= '<tr><td><input id="new_event_type" placeholder="Новое событие" required name="new_event_type"><td> ';
+		content+= '<tr><td><input id="new_event_type" class="event_type_input" placeholder="Новое событие" required name="new_event_type"><td> ';
 		content+= '</table>';
 
 		popup.setContent(content);

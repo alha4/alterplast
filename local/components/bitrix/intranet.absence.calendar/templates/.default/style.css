@@ -29,6 +29,11 @@ ul.bx-calendar-view-switcher {
  text-align: center;
  margin: 0 auto;
 }
+.event_type_input {
+ padding: 8px;
+ width:100%;
+font-size:16px;
+}
 ul.bx-calendar-view-switcher li {
 	line-height: 15px;
 	display: block;
