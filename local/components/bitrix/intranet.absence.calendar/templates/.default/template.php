@@ -21,6 +21,7 @@ if ($arParams['bAdmin']):
 		"ICON" => 'add',
 		"SORT" => 1000,
 	));
+
 	if ($arParams['bAdminX'])
 	{
 		$GLOBALS['INTRANET_TOOLBAR']->AddButton(array(
@@ -77,10 +78,11 @@ while($enum_fields = $property_enums->GetNext())
 	$TYPES[] = array(
 		'NAME'  => $enum_fields['XML_ID'],
 		'TITLE' => $enum_fields['VALUE'],
+		'COLOR' => $BGCOLORS[$c_id++]
 	);
 	if (!isset($TYPE_BGCOLORS[$enum_fields['XML_ID']]))
 	{
-		$TYPE_BGCOLORS[$enum_fields['XML_ID']] = $BGCOLORS[$c_id++];
+		$TYPE_BGCOLORS[$enum_fields['XML_ID']] = $BGCOLORS[$c_id];
 
 		if (!isset($BGCOLORS[$c_id]))
 		{
@@ -88,6 +90,13 @@ while($enum_fields = $property_enums->GetNext())
 		}
 	}
 }
+
+$GLOBALS['INTRANET_TOOLBAR']->AddButton(array(
+	'ONCLICK' => "BX.AbsenceCalendar.ShowTypesForm(".CUtil::PhpToJSObject($TYPES).")",
+	"TEXT" => GetMessage('INTR_ABSC_TPL_ADD_ENTRY_TYPE'),
+	"ICON" => 'add',
+	"SORT" => 900,
+));
 
 ?>
 <script type="text/javascript">

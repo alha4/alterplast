@@ -10,8 +10,25 @@ ul.bx-calendar-view-switcher {
 	margin-right: 30px !important;
 	height: 32px;
 }
-
-
+.popup-window-close-icon:after {
+	width:18px;
+	height:18px;
+}
+.event_types  {
+	margin-top:24px;
+}
+.event_types .caption td {
+	font-size: 19px;
+	border-bottom: 1px solid #222;
+}
+.event_types td {
+	padding-bottom:8px;
+  font-size:16px;
+}
+.event_types td:nth-child(2) div {
+ text-align: center;
+ margin: 0 auto;
+}
 ul.bx-calendar-view-switcher li {
 	line-height: 15px;
 	display: block;

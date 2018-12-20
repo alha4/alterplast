@@ -1152,7 +1152,93 @@ BX.AbsenceCalendar =
 	popup: null,
 	arParams: {}
 }
+BX.AbsenceCalendar.ShowTypesForm = function(arParams) {
 
+ var popup = new BX.PopupWindow("BXAbsenceTypes", null, {
+		autoHide: false,
+		zIndex: 0,
+		offsetLeft: 0,
+		offsetTop: 0,
+		width : 400,
+		height: 500,
+		max_height : 500,
+		overlay: {
+			backgroundColor: 'black',
+			opacity: 500
+	  }, 
+		draggable: {restrict:true},
+		closeByEsc: true,
+		titleBar: BX.message('INTR_ABSENCE_TITLE_TYPE'),
+		closeIcon: { width: "30px", height: "30px", right : "28px", top : "0px"},
+		buttons: [
+			new BX.PopupWindowButton({
+				className : "popup-window-button",
+				text: 'Сохранить',
+				events : { click : function() {  
+					
+				if(!BX('new_event_type').value) {
+ 
+					BX('new_event_type').focus();
+
+					alert('Заполните поле, новое событие !');
+
+				}
+					
+				BX.ajax.post(
+						'/local/ajax/type_absence.php',
+						{ 
+
+							event : BX('new_event_type').value
+
+						},
+
+						function(resp) {
+
+
+							 if(resp == 200) {
+								 
+									location.reload();
+									
+							 } else {
+
+                  
+							 }
+
+						});
+
+
+				}}}), 
+
+				new BX.PopupWindowButton({
+					className : "popup-window-button",
+					text: 'закрыть',
+					events : { click : function() {  
+
+						popup.close();
+
+					}}})
+			
+		]}),
+
+		content = '<table width="100%" class="event_types"><tr class="caption">';	
+		content+= '<td>Название';
+		content+= '<td>Цвет события';
+
+		for(var i in arParams) {
+
+			var item = arParams[i];
+
+			content+= '<tr><td>' + item.TITLE;
+      content+= '<td><div style="width:48px;height:48px;background-color:' + item.COLOR + '"></div>';
+		}
+		
+		content+= '<tr><td><input id="new_event_type" placeholder="Новое событие" required name="new_event_type"><td> ';
+		content+= '</table>';
+
+		popup.setContent(content);
+		
+		popup.show();
+}
 BX.AbsenceCalendar.Init = function(arParams)
 {
 	if(arParams)

@@ -74,10 +74,12 @@ $MESS["INTR_ABSC_TPL_REPEATING_EVENT_MONTHLY"] = "ежемесячное";
 $MESS["INTR_ABSC_TPL_REPEATING_EVENT_YEARLY"] = "ежегодное";
 $MESS["INTR_ABSC_TPL_INFO_CLOSE"] = "Закрыть";
 $MESS ['INTR_ABSENCE_TITLE'] = "Добавить отсутствие";
+$MESS['INTR_ABSENCE_TITLE_TYPE'] = "Добавить тип события";
 $MESS ['INTR_ABSENCE_TITLE_EDIT'] = "Редактировать отсутствие";
 $MESS ['INTR_ABSENCE_BUTTON'] = "Добавить";
 $MESS ['INTR_CLOSE_BUTTON'] = "Закрыть";
 $MESS ['INTR_LOADING'] = "Загрузка...";
 $MESS ['INTR_ABSC_TPL_PAGE_BAR'] = "Страницы";
 $MESS ['INTR_ABSC_TPL_PAGE_NEXT'] = "Следующая";
+$MESS['INTR_ABSC_TPL_ADD_ENTRY_TYPE'] = 'Добавить тип отсутствия';
 ?>
